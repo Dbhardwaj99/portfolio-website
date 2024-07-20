@@ -18,7 +18,6 @@
     --muted-foreground: 215.4 16.3% 46.9%;
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
@@ -85,4 +84,119 @@
    50% { transform: rotate(10.0deg) }
    60% { transform: rotate( 0.0deg) }  /* Reset for the last half to pause */
   100% { transform: rotate( 0.0deg) }
+}
+
+.circle-sketch-highlight{
+  position:relative;
+}
+
+.circle-sketch-highlight:before{
+  content:"";
+  z-index:-1;
+  left:-0.4em;
+  top:-0.2em;
+  border-width:2px;
+  border-style:solid;
+  border-color:red;
+  position:absolute;
+  border-right-color:transparent;
+  width:90%;
+  height:1.25em;
+  transform:rotate(3deg);
+  opacity:0.7;
+  border-radius:50%;
+  padding:0.3em 0.25em;
+}
+
+.circle-sketch-highlight:after{
+  content:"";
+  z-index:-1;
+  left:-0.4em;
+  top:0.2em;
+  padding:0.3em 0.25em;
+  border-width:2px;
+  border-style:solid;
+  border-color:red;
+  border-left-color:transparent;
+  border-top-color:transparent;
+  position:absolute;
+  width:90%;
+  height:1.25em;
+  transform:rotate(-2deg);
+  opacity:0.7;
+  border-radius:50%;
+}
+
+#hide {
+  display: inline-block;
+  max-width: 0%;
+  vertical-align: bottom;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: max-width 1s ease-in-out;
+}
+
+span.hover-kanye:hover #hide {
+  max-width: 100%;
+}
+
+.hover-kanye {
+  /* display: inline-block; */
+  position: relative;
+  background-color: black;
+  color: white;
+  border-radius: 30px;
+  padding: 5px;
+}
+
+span.hover-space:hover #hide {
+  max-width: 100%;
+}
+
+.hover-space {
+  /* display: inline-block; */
+  position: relative;
+  background-image: url("/space2.jpg");
+  background-size: cover; 
+  background-repeat: no-repeat;
+  color: white;
+  border-radius: 30px;
+  padding: 5px;
+}
+
+.hover-resume {
+  position: relative;
+  color: white;
+}
+
+span.hover-resume:hover #hide {
+  max-width: 100%;
+}
+
+@media (max-width: 640px) { /* Tailwind's sm breakpoint */
+  .show-resume {
+    display: block;
+  }
+  
+  .hide-resume {
+    display: none;
+  }
+}
+
+@media (min-width: 641px) { /* Tailwind's sm breakpoint and up */
+  .show-resume {
+    display: none;
+  }
+
+  .hide-resume {
+    display: inline-block; /* or another appropriate display property */
+  }
+}
+
+.hover-resume:hover .hide-resume {
+  display: block; /* Show resume image on hover */
+}
+
+.hide-resume {
+  display: none; /* Default hidden state for resume image */
 }

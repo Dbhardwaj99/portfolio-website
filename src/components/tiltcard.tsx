@@ -7,8 +7,7 @@ import {
   useMotionValue,
   useSpring,
 } from "framer-motion";
-import { FiCode, FiMousePointer } from "react-icons/fi";
-import { IconBase } from "react-icons";
+
 
 type TiltCardProps = {
   cardTitle: string;
@@ -16,7 +15,7 @@ type TiltCardProps = {
 };
 
 const ROTATION_RANGE = 32.5;
-const HALF_ROTATION_RANGE = 32.5 / 2;
+const HALF_ROTATION_RANGE = ROTATION_RANGE / 2;
 
 const TiltCard: React.FC<TiltCardProps> = ({ cardTitle, cardIcon }) => {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -37,11 +36,18 @@ const TiltCard: React.FC<TiltCardProps> = ({ cardTitle, cardIcon }) => {
     const width = rect.width;
     const height = rect.height;
 
-    const mouseX = (e.clientX - rect.left) * ROTATION_RANGE;
-    const mouseY = (e.clientY - rect.top) * ROTATION_RANGE;
+    // const mouseX = (e.clientX - rect.left) * ROTATION_RANGE;
+    // const mouseY = (e.clientY - rect.top) * ROTATION_RANGE;
 
-    const rX = (mouseY / height - HALF_ROTATION_RANGE) * -1;
-    const rY = mouseX / width - HALF_ROTATION_RANGE;
+    // const rX = (mouseY / height - HALF_ROTATION_RANGE) * -1;
+    // const rY = mouseX / width - HALF_ROTATION_RANGE;
+
+    const mouseX = (e.clientX - rect.left) / width;
+    const mouseY = (e.clientY - rect.top) / height;
+
+    // Calculate rotation values based on mouse position
+    const rX = (mouseY * ROTATION_RANGE - HALF_ROTATION_RANGE) * -1;
+    const rY = mouseX * ROTATION_RANGE - HALF_ROTATION_RANGE;
 
     x.set(rX);
     y.set(rY);
@@ -61,14 +67,14 @@ const TiltCard: React.FC<TiltCardProps> = ({ cardTitle, cardIcon }) => {
         transformStyle: "preserve-3d",
         transform,
       }}
-      className="relative h-56 w-52 rounded-xl bg-gradient-to-br from-orange-100 to-amber-100"
+      className="relative h-56 w-52 rounded-xl bg-gradient-to-br from-primary to-secondary"
     >
       <div
         style={{
           transform: "translateZ(75px)",
           transformStyle: "preserve-3d",
         }}
-        className="absolute inset-4 grid place-content-center rounded-xl bg-white shadow-lg"
+        className="absolute inset-4 grid place-content-center rounded-xl bg-background shadow-lg"
       >
         <p
           style={{
